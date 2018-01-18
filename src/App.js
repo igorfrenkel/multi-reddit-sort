@@ -58,8 +58,8 @@ class App extends Component {
           <ul>
             <li><strike>render a list of reddits for each multi</strike></li>
             <li><strike>add another multi with its own state</strike></li>
-            <li>unchecking/checking changes state</li>
             <li>add state to redux</li>
+            <li>unchecking/checking changes state</li>
             <li>link redux changes to reddit</li>
             <li>sorted reddit list in MultiRedditView</li>
             <li>style it</li>
