@@ -14,8 +14,8 @@ const MultiRedditView = (props) => {
         { subs.map((sub, i) => {
           return(
             <li key={i}>
-              <input type="checkbox" checked={multi.members.indexOf(sub) >= 0} onChange={() => {}} />
-              {sub}
+              <input type="checkbox" checked={multi.members.indexOf(sub.id) >= 0} onChange={() => {}} />
+              {sub.id}
             </li>
           )
         })}

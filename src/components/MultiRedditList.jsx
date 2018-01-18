@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 const MultiRedditList = (props) => {
-  console.log(props)
-  const multis = ['security'];
+  const { multis } = props
 
   return (
     <ul>
-      {multis.map(multi =>
-        <li><Link to={`/multi/${multi}`}>{multi}</Link></li>)}
+      {multis.map((multi, i) =>
+        <li key={i}><Link to={`/multi/${multi.name}`}>{multi.name}</Link></li>)}
     </ul>
   )
 };
