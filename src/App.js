@@ -1,53 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom';
 import MultiRedditList from './components/MultiRedditList';
-import MultiRedditView from './components/MultiRedditView';
+import MultiRedditViewHoc from './containers/MultiRedditViewHoc';
 
-const newSub = (id, opts={}) => {
-  return {
-    id: id,
-    ...opts
-  }
-}
-
-const initialState = {
-  multis: [
-    { 
-      name: "security",
-      members: [ "netsec", "security", "lockpicking" ]
-    },
-    { 
-      name: "fun",
-      members: [ "gifs", "videos", "cats" ]
-    }
-  ],
-  subs: [
-    newSub("gifs"), newSub("netsec"), newSub("security"), newSub("lockpicking"), newSub("videos"), newSub("cats")
-  ]
-}
-
-const MultiRedditViewHoc = (props) => {
-  const multi = initialState.multis.filter(multi => multi.name === props.match.params.multi)
-
-  if (multi.length === 0) console.log('invalid multi')
-
-  return(
-    <MultiRedditView
-      multi={multi[0]}
-      subs={initialState.subs} />
-  )
-}
-
-const MultiRedditListHoc = (props) => (
-  <MultiRedditList {...props} multis={initialState.multis} />
+const anon = (props) => (
+  <MultiRedditList {...props} multis={props.multis} />
 )
+const MultiRedditListHoc = connect(state=>(state))(anon)
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = initialState
-  }
-  render() {
+  render() {    
     return (
       <BrowserRouter>
         <div>
@@ -70,4 +33,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App
