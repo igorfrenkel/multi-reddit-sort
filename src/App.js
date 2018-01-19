@@ -23,7 +23,16 @@ class App extends Component {
             <li><strike>add another multi with its own state</strike></li>
             <li><strike>add state to redux</strike></li>
             <li><strike>unchecking/checking changes state</strike></li>
-            <li>link redux changes to reddit</li>
+            <li>reddit functionality
+              <ul>
+                <li>get reddit api key</li>
+                <li>get auth0 api key</li>
+                <li>create auth0-reddit link and send user from view to auth0</li>
+                <li>pull user's list of subscribed subreddits</li>
+                <li>pull user's list of multis</li>
+                <li>send membership change to reddit</li>
+              </ul>
+            </li>
             <li>sorted reddit list in MultiRedditView</li>
             <li>style it</li>
           </ul>
