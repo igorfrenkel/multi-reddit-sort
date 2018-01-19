@@ -11,7 +11,7 @@ const composeEnhancers =
     }) : compose
 
 const client = axios.create({
-  baseURL: 'https://www.reddit.com',
+  baseURL: 'https://oauth.reddit.com',
   responseType: 'json'
 })
 
@@ -20,7 +20,8 @@ const axiosMiddlewareOptions = {
     request: [
       (obj, config) => {
         if (obj.getState().token) {
-          config.headers['Authorization'] = `Bearer ${obj.getState().token}`
+          config.headers['Authorization'] = `bearer ${obj.getState().token}`
+          config.headers['User-Agent'] = 'web:com.example.app:v0.0.1'
         }
         return config
       }

@@ -27,7 +27,7 @@ export const getMultis = () => {
     type: "GET_MULTIS",
     payload: {
       request: {
-        url: "/api/multi/mine"
+        url: "/subreddits/mine"
       }
     }
   }
