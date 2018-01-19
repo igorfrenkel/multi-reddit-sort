@@ -1,3 +1,5 @@
+import { receivedRedditAuthCode } from "./actions";
+
 const newSub = (id, opts={}) => {
   return {
     id: id,
@@ -5,7 +7,7 @@ const newSub = (id, opts={}) => {
   }
 }
 
-const initialState = {
+export const initialState = {
   multis: [
     { 
       id: "security",
@@ -18,7 +20,8 @@ const initialState = {
   ],
   subs: [
     newSub("gifs"), newSub("netsec"), newSub("security"), newSub("lockpicking"), newSub("videos"), newSub("cats")
-  ]
+  ],
+  token: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -37,6 +40,13 @@ const reducer = (state = initialState, action) => {
       const temp = state.multis.filter(m => m.id !== multi.id).concat(multi)
       return { ...state, multis: temp }
     }
+
+    case "RECEIVED_REDDIT_AUTH_CODE_SUCCESS": 
+      return {
+        ...state,
+        token: action.payload.data.access_token
+      }
+
     default:
       return state
   }

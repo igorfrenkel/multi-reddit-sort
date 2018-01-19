@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, Redirect, Route, Link } from 'react-router-dom';
-import MultiRedditList from './components/MultiRedditList';
-import MultiRedditViewHoc from './containers/MultiRedditViewHoc';
+import { BrowserRouter, Redirect, Route, Link } from 'react-router-dom'
+import MultiRedditList from './components/MultiRedditList'
+import MultiRedditViewHoc from './containers/MultiRedditViewHoc'
+import AuthRedditConfirm from './containers/AuthRedditConfirm'
+import Navigation from './containers/Navigation'
 
 const anon = (props) => (
   <MultiRedditList {...props} multis={props.multis} />
@@ -10,17 +12,17 @@ const anon = (props) => (
 const MultiRedditListHoc = connect(state=>(state))(anon)
 
 const AuthRedditLogin = () => (
-  window.location = 'https://www.reddit.com/api/v1/authorize?client_id=15BdIU53jfyFcw&response_type=code&state=123&redirect_uri=http://localhost:3002&duration=permanent&scope=mysubreddits'
+  window.location = 'https://www.reddit.com/api/v1/authorize?client_id=15BdIU53jfyFcw&response_type=code&state=124&redirect_uri=http://localhost:3002/auth/reddit/confirm&duration=permanent&scope=mysubreddits'
 )
-
 
 class App extends Component {
   render() {    
     return (
       <BrowserRouter>
         <div>
-          <Link to="/auth/reddit/login">auth</Link>
+          <Navigation/>
           <Route path="/auth/reddit/login" component={AuthRedditLogin} />
+          <Route path="/auth/reddit/confirm" component={AuthRedditConfirm} />
           <Route path="/multi/:multi" component={MultiRedditViewHoc} />
           <Route path="/" exact component={MultiRedditListHoc} />
           <hr/>
