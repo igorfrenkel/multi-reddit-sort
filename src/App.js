@@ -25,10 +25,10 @@ class App extends Component {
             <li><strike>unchecking/checking changes state</strike></li>
             <li>reddit functionality
               <ul>
-                <li>get reddit api key</li>
-                <li>get auth0 api key</li>
-                <li>create auth0-reddit link and send user from view to auth0</li>
-                <li>pull user's list of subscribed subreddits</li>
+                <li>bake into the app reddit api key</li>
+                <li>exchange code for bearer token</li>
+                <li>make authed call to fetch subreddits</li>
+                
                 <li>pull user's list of multis</li>
                 <li>send membership change to reddit</li>
               </ul>
