@@ -7,7 +7,7 @@ const MultiRedditList = (props) => {
   return (
     <ul>
       {multis.map((multi, i) =>
-        <li key={i}><Link to={`/multi/${multi.name}`}>{multi.name}</Link></li>)}
+        <li key={i}><Link to={`/multi/${multi.id}`}>{multi.id}</Link></li>)}
     </ul>
   )
 };
