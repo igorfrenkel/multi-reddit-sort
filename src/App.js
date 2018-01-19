@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import MultiRedditList from './components/MultiRedditList';
 import MultiRedditViewHoc from './containers/MultiRedditViewHoc';
 
@@ -9,12 +9,18 @@ const anon = (props) => (
 )
 const MultiRedditListHoc = connect(state=>(state))(anon)
 
+const AuthRedditLogin = () => (
+  window.location = 'https://www.reddit.com/api/v1/authorize?client_id=15BdIU53jfyFcw&response_type=TYPE&state=123&redirect_uri=http://localhost:3002&duration=permanent&scope=mysubreddits'
+)
+
+
 class App extends Component {
   render() {    
     return (
       <BrowserRouter>
         <div>
-          <Route path="/multi/:multi" component={MultiRedditViewHoc}></Route>
+          <Route path="auth/reddit/login" component={()=> window.location = 'www.google.ca'} />
+          <Route path="/multi/:multi" component={MultiRedditViewHoc} />
           <Route path="/" exact component={MultiRedditListHoc} />
           <hr/>
           <h3>todo</h3>
