@@ -1,7 +1,7 @@
 import {createStore, applyMiddleware, compose} from 'redux'
 import axios from 'axios'
 import axiosMiddleware from 'redux-axios-middleware'
-import reducer from './reducer'
+import reducer, { initialState } from './reducer'
 
 const composeEnhancers = 
   typeof window === 'object' &&
@@ -28,14 +28,27 @@ const axiosMiddlewareOptions = {
   }
 }
 
+const persistedState = localStorage.getItem('multi-reddit-sort')
+  ? JSON.parse(localStorage.getItem('multi-reddit-sort'))
+  : initialState
+
+
 let store = createStore(
   reducer,
+  persistedState,
   composeEnhancers(
     applyMiddleware(
       axiosMiddleware(client, axiosMiddlewareOptions)
     )
   )
 )
+
+store.subscribe(() => {
+  localStorage.setItem(
+    'multi-reddit-sort',
+    JSON.stringify(store.getState())
+  )
+})
 
 export default store
 

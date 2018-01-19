@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const Navigation = (props) => {
-  if (props.token) {
+  if (!props.token) {
     return(<Link to="/auth/reddit/login">auth</Link>)
   }
   else {

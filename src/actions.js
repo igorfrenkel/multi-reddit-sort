@@ -20,3 +20,15 @@ export const receivedRedditAuthCode = (code) => {
     }
   }
 }
+
+export const getMultis = () => {
+  console.log('getMultis')
+  return {
+    type: "GET_MULTIS",
+    payload: {
+      request: {
+        url: "/api/multi/mine"
+      }
+    }
+  }
+}

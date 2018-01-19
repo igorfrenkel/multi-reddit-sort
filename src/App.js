@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter, Redirect, Route, Link } from 'react-router-dom'
-import MultiRedditList from './components/MultiRedditList'
 import MultiRedditViewHoc from './containers/MultiRedditViewHoc'
+import MultiRedditListHoc from './containers/MultiRedditListHoc'
 import AuthRedditConfirm from './containers/AuthRedditConfirm'
 import Navigation from './containers/Navigation'
-
-const anon = (props) => (
-  <MultiRedditList {...props} multis={props.multis} />
-)
-const MultiRedditListHoc = connect(state=>(state))(anon)
 
 const AuthRedditLogin = () => (
   window.location = 'https://www.reddit.com/api/v1/authorize?client_id=15BdIU53jfyFcw&response_type=code&state=124&redirect_uri=http://localhost:3002/auth/reddit/confirm&duration=permanent&scope=mysubreddits'
