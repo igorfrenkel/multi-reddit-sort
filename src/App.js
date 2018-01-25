@@ -37,8 +37,8 @@ class App extends Component {
             <li><strike>unchecking/checking changes state</strike></li>
             <li>reddit functionality
               <ul>
-                <li>bake into the app reddit api key</li>
-                <li>exchange code for bearer token</li>
+                <li><strike>bake into the app reddit api key</strike></li>
+                <li><strike>exchange code for bearer token</strike></li>
                 <li>make authed call to fetch subreddits</li>
                 
                 <li>pull user's list of multis</li>
