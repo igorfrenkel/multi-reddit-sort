@@ -5,7 +5,7 @@ import { receivedRedditAuthCode } from '../actions'
 
 const AuthRedditConfirm = (props) => {
     const codeTup = props.location.search.replace('?', '').split('&')
-      .map(pair => pair.split('=')).find(tup => tup[0] == 'code')
+      .map(pair => pair.split('=')).find(tup => tup[0] === 'code')
     
     if (codeTup === undefined) {
       console.log('No code supplied by reddit')

@@ -1,10 +1,9 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import MultiRedditView from '../components/MultiRedditView'
-import {changeMultiMembership} from '../actions'
+import { changeMultiMembership } from '../actions'
 
 const MultiRedditViewHoc = (props) => {
-    console.log(props)
     const multi = props.multis.filter(multi => multi.id === props.match.params.multi)
   
     if (multi.length === 0) console.log('invalid multi')

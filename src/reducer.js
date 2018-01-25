@@ -1,5 +1,3 @@
-import { receivedRedditAuthCode } from "./actions";
-
 const newSub = (id, opts={}) => {
   return {
     id: id,
