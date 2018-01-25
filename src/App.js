@@ -8,7 +8,7 @@ import Navigation from './containers/Navigation'
 import { getMultis } from './actions'
 
 const AuthRedditLogin = () => (
-  window.location = 'https://www.reddit.com/api/v1/authorize?client_id=15BdIU53jfyFcw&response_type=code&state=124&redirect_uri=http://localhost:3002/auth/reddit/confirm&duration=permanent&scope=mysubreddits'
+  window.location = 'https://www.reddit.com/api/v1/authorize?client_id=15BdIU53jfyFcw&response_type=code&state=124&redirect_uri=http://localhost:3002/auth/reddit/confirm&duration=permanent&scope=mysubreddits,read,subscribe'
 )
 
 class App extends Component {
@@ -39,8 +39,9 @@ class App extends Component {
               <ul>
                 <li><strike>bake into the app reddit api key</strike></li>
                 <li><strike>exchange code for bearer token</strike></li>
+                <li><strike>make authed call to fetch multis</strike></li>
+                <li>wire multis returned by api to state</li>
                 <li>make authed call to fetch subreddits</li>
-                
                 <li>pull user's list of multis</li>
                 <li>send membership change to reddit</li>
               </ul>

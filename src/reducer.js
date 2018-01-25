@@ -44,6 +44,10 @@ const reducer = (state = initialState, action) => {
         ...state,
         token: action.payload.data.access_token
       }
+    case "GET_MULTIS_SUCCESS":
+      return {
+        ...state
+      }
 
     default:
       return state
