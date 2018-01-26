@@ -1,12 +1,4 @@
-const newSub = (id, opts={}) => {
-  return {
-    id: id,
-    ...opts
-  }
-}
-
 export const initialState = {
-    newSub("gifs"), newSub("netsec"), newSub("security"), newSub("lockpicking"), newSub("videos"), newSub("cats"), newSub("food")
   multis: [],
   subs: [],
   token: null
