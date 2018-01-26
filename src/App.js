@@ -41,8 +41,10 @@ class App extends Component {
                 <li><strike>bake into the app reddit api key</strike></li>
                 <li><strike>exchange code for bearer token</strike></li>
                 <li><strike>make authed call to fetch multis</strike></li>
-                <li>wire multis returned by api to state</li>
-                <li>make authed call to fetch subreddits</li>
+                <li><strike>wire multis returned by api to state</strike></li>
+                <li><strike>make authed call to fetch subreddits</strike></li>
+                <li>add refresh link, logout</li>
+                <li>paginate multi and sub calls</li>
                 <li>pull user's list of multis</li>
                 <li>send membership change to reddit</li>
               </ul>

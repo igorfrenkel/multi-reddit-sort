@@ -7,7 +7,7 @@ const Navigation = (props) => {
     return(<Link to="/auth/reddit/login">auth</Link>)
   }
   else {
-    return(<div>You are authenticated</div>)
+    return(<div>Welcome [user]!</div>)
   }
 }
 

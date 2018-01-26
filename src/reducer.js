@@ -6,19 +6,9 @@ const newSub = (id, opts={}) => {
 }
 
 export const initialState = {
-  multis: [
-    { 
-      id: "security",
-      members: [ "netsec", "security", "lockpicking" ]
-    },
-    { 
-      id: "fun",
-      members: [ "gifs", "videos", "cats" ]
-    }
-  ],
-  subs: [
     newSub("gifs"), newSub("netsec"), newSub("security"), newSub("lockpicking"), newSub("videos"), newSub("cats"), newSub("food")
-  ],
+  multis: [],
+  subs: [],
   token: null
 }
 
