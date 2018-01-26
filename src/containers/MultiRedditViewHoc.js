@@ -20,7 +20,7 @@ const MultiRedditViewHoc = (props) => {
 const mapStateToProps = (state) => (state)
 
 const mapDispatchToProps = dispatch => ({
-  changeMultiMembership: (multiId, subId) => dispatch(changeMultiMembership(multiId, subId))
+  changeMultiMembership: (multi, sub, selected) => dispatch(changeMultiMembership(multi, sub, selected))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MultiRedditViewHoc)

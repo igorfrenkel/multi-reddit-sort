@@ -1,16 +1,12 @@
 export const initialState = {
   multis: [],
   subs: [],
+  subs_temp: [],
   token: null
 }
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
-    case "CHANGE_MULTI_MEMBERSHIP": {
-      console.log(action)
-      return state
-    }
-
     case "RECEIVED_REDDIT_AUTH_CODE_SUCCESS": 
       return {
         ...state,
@@ -25,8 +21,32 @@ const reducer = (state = initialState, action) => {
     case "GET_SUBS_SUCCESS":
       return {
         ...state,
-        subs: [...state.subs, ...action.payload.data.data.children]
+        subs_temp: [
+          ...state.subs_temp,
+          ...action.payload.data.data.children
+        ]
       }
+    
+    // Note: this is hacky...
+    case "GOT_ALL_SUBS":
+      return {
+        ...state,
+        subs: state.subs_temp,
+        subs_temp: []
+      }
+
+    case "GET_MULTIS_FAIL":
+      if (action.error.response.data.message === "Unauthorized") {
+        return {
+          ...state,
+          token: null
+        }
+      } else {
+        console.log('funky error')
+        return state
+      }
+
+    // Note: should LOGOUT reset app state? or reset token only?
     case "LOGOUT":
       return initialState
 

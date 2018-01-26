@@ -1,9 +1,92 @@
-export const changeMultiMembership = (multiId, subId) => {
-  return {
-    type: "CHANGE_MULTI_MEMBERSHIP",
-    multiId,
-    subId
+const getMultis = () => ({
+  type: "GET_MULTIS",
+  payload: {
+    request: {
+      url: "/api/multi/mine"
+    }
   }
+})
+
+// not implemented
+const renameMulti = (display_name, from, to) => ({
+  type: "RENAME_MULTI",
+  payload: {
+    request: {
+      method: "post",
+      url: "/api/multi/rename",
+      params: { display_name, from, to }
+    }
+  }
+})
+
+// not implemented
+const deleteMulti = (multipath) => ({
+  type: "DELETE_MULTI",
+  payload: {
+    request: {
+      url: `/api/multi/${multipath}`
+    }
+  }
+})
+
+// not implemented
+const createMulti = (model, multipath) => ({
+  type: "CREATE_MULTI",
+  payload: {
+    request: {
+      method: 'post',
+      url: `/api/multi/${multipath}`,
+      params: { model }
+    }
+  }
+})
+
+// not implemented
+const updateMulti = (model, multipath) => ({
+  type: "UPDATE_MULTI",
+  payload: {
+    request: {
+      method: 'put',
+      url: `/api/multi/${multipath}`,
+      params: { model }
+    }
+  }
+})
+
+const removeSubredditFromMulti = (multipath, srname) => ({
+  type: "REMOVE_SUB_FROM_MULTI",
+  payload: {
+    request: {
+      method: 'delete',
+      url: `/api/multi/${multipath}/r/${srname}`
+    }
+  }
+})
+
+const addSubredditToMulti = (multipath, srname) => ({
+  type: "ADD_SUB_TO_MULTI",
+  payload: {
+    request: {
+      method: 'put',
+      url: `/api/multi/${multipath}/r/${srname}`,
+      params: { model: { name: srname } }
+    }
+  }
+})
+
+export const changeMultiMembership = (multi, sub, selected) => {
+  return dispatch => {
+    if (selected) {
+      dispatch(removeSubredditFromMulti(multi.data.path, sub.data.display_name))
+        .then(() => dispatch(refresh()))
+    }
+    else {
+      dispatch(addSubredditToMulti(multi.data.path, sub.data.display_name))
+        .then(() => dispatch(refresh()))
+    }
+    
+    dispatch({type: "WILL_CHANGE_MULTI_MEMBERSHIP"})    
+  } 
 }
 
 export const receivedRedditAuthCode = (code) => {
@@ -16,19 +99,6 @@ export const receivedRedditAuthCode = (code) => {
         data: {
           code: code
         }
-      }
-    }
-  }
-}
-
-// Note: no pagination parameters available via api
-// assumption is that all multis get returned
-const getMultis = () => {
-  return {
-    type: "GET_MULTIS",
-    payload: {
-      request: {
-        url: "/api/multi/mine"
       }
     }
   }
@@ -55,8 +125,10 @@ const getAllSubs = (after=null) => {
   return dispatch => {
     dispatch(getSubs(after))
     .then(res => {
-      if (res.payload.data.data.after) {
-        dispatch(getSubs(res.payload.data.data.after))
+      if (res.payload && res.payload.data.data.after) {
+        dispatch(getAllSubs(res.payload.data.data.after))
+      } else if (res.payload && !res.payload.data.after) {
+        dispatch({ type: "GOT_ALL_SUBS" })
       }
     })
   }
@@ -71,7 +143,6 @@ export const logout = () => {
 export const refresh = () => {
   return dispatch => {
     dispatch(getMultis())
-    dispatch(getAllSubs())
+    .then(()=>dispatch(getAllSubs()))
   }
 }
-
