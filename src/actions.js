@@ -31,3 +31,14 @@ export const getMultis = () => {
     }
   }
 }
+
+export const getSubs = () => {
+  return {
+    type: "GET_SUBS",
+    payload: {
+      request: {
+        url: "/subreddits/mine"
+      }
+    }
+  }
+}

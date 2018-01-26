@@ -4,9 +4,9 @@ import MultiRedditView from '../components/MultiRedditView'
 import { changeMultiMembership } from '../actions'
 
 const MultiRedditViewHoc = (props) => {
-    const multi = props.multis.filter(multi => multi.id === props.match.params.multi)
+    const multi = props.multis.filter(multi => multi.data.name === props.match.params.multi)
   
-    if (multi.length === 0) console.log('invalid multi')
+    if (multi.length === 0) { return (<div>Invalid multi</div>) }
   
     return(
       <MultiRedditView

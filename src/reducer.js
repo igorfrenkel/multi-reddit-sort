@@ -17,7 +17,7 @@ export const initialState = {
     }
   ],
   subs: [
-    newSub("gifs"), newSub("netsec"), newSub("security"), newSub("lockpicking"), newSub("videos"), newSub("cats")
+    newSub("gifs"), newSub("netsec"), newSub("security"), newSub("lockpicking"), newSub("videos"), newSub("cats"), newSub("food")
   ],
   token: null
 }
@@ -25,18 +25,8 @@ export const initialState = {
 const reducer = (state = initialState, action) => {
   switch(action.type) {
     case "CHANGE_MULTI_MEMBERSHIP": {
-      const multi = Object.assign({}, state.multis.find(m => m.id === action.multiId))
-      
-      if (multi === undefined) return state
-
-      if (multi.members.indexOf(action.subId) >= 0) {
-        multi.members = multi.members.filter(id => id !== action.subId)
-      } else {
-        multi.members = multi.members.concat(action.subId)
-      }
-
-      const temp = state.multis.filter(m => m.id !== multi.id).concat(multi)
-      return { ...state, multis: temp }
+      console.log(action)
+      return state
     }
 
     case "RECEIVED_REDDIT_AUTH_CODE_SUCCESS": 
@@ -46,7 +36,14 @@ const reducer = (state = initialState, action) => {
       }
     case "GET_MULTIS_SUCCESS":
       return {
-        ...state
+        ...state,
+        multis: action.payload.data
+      }
+    
+    case "GET_SUBS_SUCCESS":
+      return {
+        ...state,
+        subs: action.payload.data.data.children
       }
 
     default:

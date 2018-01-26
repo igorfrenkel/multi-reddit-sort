@@ -8,18 +8,18 @@ const MultiRedditView = (props) => {
     <div>
       <Link to="/">Back</Link>
       
-      <h1>{multi.id}</h1>
+      <h1>{multi.data.name}</h1>
       <hr/>
       <h3>Subs:</h3>
       <ul>
         { subs.map(sub => {
           return(
-            <li key={sub.id}>
+            <li key={sub.data.display_name}>
               <input
                 type="checkbox"
-                checked={multi.members.indexOf(sub.id) >= 0}
-                onChange={()=>handleChangeMembership(multi.id, sub.id)} />
-              {sub.id}
+                checked={multi.data.subreddits.map(sr => sr.name).indexOf(sub.data.display_name) >= 0}
+                onChange={()=>handleChangeMembership(multi.data.name, sub.data.display_name)} />
+              {sub.data.display_name}
             </li>
           )
         })}

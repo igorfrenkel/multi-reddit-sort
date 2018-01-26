@@ -5,7 +5,7 @@ import MultiRedditViewHoc from './containers/MultiRedditViewHoc'
 import MultiRedditListHoc from './containers/MultiRedditListHoc'
 import AuthRedditConfirm from './containers/AuthRedditConfirm'
 import Navigation from './containers/Navigation'
-import { getMultis } from './actions'
+import { getMultis, getSubs } from './actions'
 
 const AuthRedditLogin = () => (
   window.location = 'https://www.reddit.com/api/v1/authorize?client_id=15BdIU53jfyFcw&response_type=code&state=124&redirect_uri=http://localhost:3002/auth/reddit/confirm&duration=permanent&scope=mysubreddits,read,subscribe'
@@ -15,6 +15,7 @@ class App extends Component {
   componentWillMount() {
       if(this.props.token){
           this.props.getMultis()
+          this.props.getSubs()
       } else {
         console.error('no token? cant pull, please auth')
       }
@@ -56,7 +57,8 @@ class App extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getMultis: () => dispatch(getMultis())
+  getMultis: () => dispatch(getMultis()),
+  getSubs: () => dispatch(getSubs())
 })
 
 export default connect(state=>(state), mapDispatchToProps)(App)

@@ -21,7 +21,6 @@ const axiosMiddlewareOptions = {
       (obj, config) => {
         if (obj.getState().token) {
           config.headers['Authorization'] = `bearer ${obj.getState().token}`
-          config.headers['User-Agent'] = 'web:com.example.app:v0.0.1'
         }
         return config
       }
