@@ -1,6 +1,7 @@
 import {createStore, applyMiddleware, compose} from 'redux'
 import axios from 'axios'
 import axiosMiddleware from 'redux-axios-middleware'
+import thunk from 'redux-thunk'
 import reducer, { initialState } from './reducer'
 
 const composeEnhancers = 
@@ -38,7 +39,8 @@ let store = createStore(
   persistedState,
   composeEnhancers(
     applyMiddleware(
-      axiosMiddleware(client, axiosMiddlewareOptions)
+      axiosMiddleware(client, axiosMiddlewareOptions),
+      thunk
     )
   )
 )

@@ -42,3 +42,17 @@ export const getSubs = () => {
     }
   }
 }
+
+export const logout = () => {
+  return {
+    type: "LOGOUT"
+  }
+}
+
+export const refresh = () => {
+  return dispatch => {
+    dispatch(getMultis())
+    dispatch(getSubs())
+  }
+}
+

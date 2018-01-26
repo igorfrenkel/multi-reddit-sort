@@ -27,6 +27,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         subs: action.payload.data.data.children
       }
+    case "LOGOUT":
+      return initialState
 
     default:
       return state
