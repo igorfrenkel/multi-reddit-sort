@@ -25,7 +25,7 @@ const reducer = (state = initialState, action) => {
     case "GET_SUBS_SUCCESS":
       return {
         ...state,
-        subs: action.payload.data.data.children
+        subs: [...state.subs, ...action.payload.data.data.children]
       }
     case "LOGOUT":
       return initialState

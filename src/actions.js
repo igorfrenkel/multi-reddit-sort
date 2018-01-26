@@ -21,7 +21,9 @@ export const receivedRedditAuthCode = (code) => {
   }
 }
 
-export const getMultis = () => {
+// Note: no pagination parameters available via api
+// assumption is that all multis get returned
+const getMultis = () => {
   return {
     type: "GET_MULTIS",
     payload: {
@@ -32,14 +34,31 @@ export const getMultis = () => {
   }
 }
 
-export const getSubs = () => {
+const SUBS_FETCH_LIMIT_MAX = 100
+
+const getSubs = (after) => {
   return {
     type: "GET_SUBS",
     payload: {
       request: {
-        url: "/subreddits/mine"
+        url: "/subreddits/mine",
+        params: {
+          limit: SUBS_FETCH_LIMIT_MAX,
+          after
+        }
       }
     }
+  }
+}
+
+const getAllSubs = (after=null) => {
+  return dispatch => {
+    dispatch(getSubs(after))
+    .then(res => {
+      if (res.payload.data.data.after) {
+        dispatch(getSubs(res.payload.data.data.after))
+      }
+    })
   }
 }
 
@@ -52,7 +71,7 @@ export const logout = () => {
 export const refresh = () => {
   return dispatch => {
     dispatch(getMultis())
-    dispatch(getSubs())
+    dispatch(getAllSubs())
   }
 }
 
