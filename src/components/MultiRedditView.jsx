@@ -3,11 +3,18 @@ import { Link } from 'react-router-dom'
 
 const MultiRedditView = (props) => {
   const { multi, subs, handleChangeMembership } = props
-  
+  if (!multi) {
+    return (
+      <div>
+        <Link to="/">Back</Link>
+        <h1>Invalid multi {props.match.params.multi}</h1>
+        <hr/>
+      </div>
+    )
+  }
   return (
     <div>
       <Link to="/">Back</Link>
-      
       <h1>{multi.data.name}</h1>
       <hr/>
       <h3>Subs:</h3>
