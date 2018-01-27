@@ -7,7 +7,7 @@ import MultiForm from './components/MultiForm'
 import Navigation from './containers/Navigation'
 
 const AuthRedditLogin = () => (
-  window.location = 'https://www.reddit.com/api/v1/authorize?client_id=15BdIU53jfyFcw&response_type=code&state=124&redirect_uri=http://localhost:3002/auth/reddit/confirm&duration=permanent&scope=mysubreddits,read,subscribe'
+  window.location = 'https://www.reddit.com/api/v1/authorize?client_id=15BdIU53jfyFcw&response_type=code&state=124&redirect_uri=http://localhost:3002/auth/reddit/confirm&duration=permanent&scope=identity,mysubreddits,read,subscribe'
 )
 
 const App = () => (

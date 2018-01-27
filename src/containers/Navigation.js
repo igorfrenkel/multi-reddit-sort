@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom'
 import { logout, refresh } from '../actions'
 
 const Navigation = (props) => {
-  if (!props.token) {
+  const { token, username } = props
+  if (!token) {
     return(<Link to="/auth/reddit/login">auth</Link>)
   }
   else {
     return(<div>
-      <h2>Welcome [user]!</h2>
+      <h2>Welcome {username}!</h2>
       <button onClick={()=>props.refresh()}>Refresh</button>
       <button onClick={()=>props.logout()}>Logout</button>
     </div>)

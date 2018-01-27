@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { addMulti } from '../actions'
+import { Link, Redirect } from 'react-router-dom'
+import { createMulti, getMultis } from '../actions'
 
 class MultiForm extends React.Component {
   constructor(props){
@@ -13,21 +13,29 @@ class MultiForm extends React.Component {
     }
   }
   handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+    this.setState({ [e.target.name]: e.target.value })
   }
+
   toggleSubreddit = (e) => {
     this.setState({
       subreddits: this.state.subreddits.some(el => el.name === e.target.name)
-      ? this.state.subreddits.filter(el => el.name !== e.target.name)
-      : this.state.subreddits.concat({ name: e.target.name })
+        ? this.state.subreddits.filter(el => el.name !== e.target.name)
+        : this.state.subreddits.concat({ name: e.target.name })
     }) 
   }
+
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.addMulti(this.state)
+    const { username } = this.props
+    // todo: validate before submitting
+    this.props.createMulti(this.state, `user/${username}/m/${this.state.display_name}`)
+      .then(()=>{
+        this.props.getMultis()
+        this.props.history.push('/')
+      })
+      .catch((response)=>console.log(response))
   }
+
   render() {
     return (
       <div>
@@ -87,7 +95,8 @@ class MultiForm extends React.Component {
 
 export default connect(
   state => ({
-    subs: state.subs.map(sub=>sub.data.display_name)
+    subs: state.subs.map(sub=>sub.data.display_name),
+    username: state.username 
   }),
-  { addMulti }
+  { createMulti, getMultis }
 )(MultiForm)

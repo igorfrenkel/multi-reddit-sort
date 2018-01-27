@@ -1,8 +1,17 @@
-const getMultis = () => ({
+export const getMultis = () => ({
   type: "GET_MULTIS",
   payload: {
     request: {
       url: "/api/multi/mine"
+    }
+  }
+})
+
+const getMyInfo = () => ({
+  type: "GET_MY_INFO",
+  payload: {
+    request: {
+      url: "/api/v1/me"
     }
   }
 })
@@ -29,7 +38,7 @@ const deleteMulti = (multipath) => ({
   }
 })
 
-const createMulti = (model, multipath) => ({
+export const createMulti = (model, multipath) => ({
   type: "CREATE_MULTI",
   payload: {
     request: {
@@ -72,14 +81,6 @@ const addSubredditToMulti = (multipath, srname) => ({
     }
   }
 })
-
-export const addMulti = (model) => {
-  return dispatch => {
-    dispatch(
-      createMulti(model, `user/vinogvla/m/${model.display_name}`)
-    )
-  }
-}
 
 export const removeMulti = (multi) => {
   return dispatch => {
@@ -157,6 +158,7 @@ export const logout = () => {
 
 export const refresh = () => {
   return dispatch => {
+    dispatch(getMyInfo())
     dispatch(getMultis())
     .then(()=>dispatch(getAllSubs()))
   }

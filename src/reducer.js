@@ -2,11 +2,17 @@ export const initialState = {
   multis: [],
   subs: [],
   subs_temp: [],
-  token: null
+  token: null,
+  username: null
 }
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
+    case "GET_MY_INFO_SUCCESS": 
+      return {
+        ...state,
+        username: action.payload.data.name
+      }
     case "RECEIVED_REDDIT_AUTH_CODE_SUCCESS": 
       return {
         ...state,

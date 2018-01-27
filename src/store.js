@@ -17,11 +17,12 @@ const client = axios.create({
 })
 
 const axiosMiddlewareOptions = {
+  returnRejectedPromiseOnError: true,
   interceptors: {
     request: [
       (obj, config) => {
         if (obj.getState().token) {
-          config.headers['Authorization'] = `bearer ${obj.getState().token}`
+          config.headers['Authorization'] = `Bearer ${obj.getState().token}`
         }
         return config
       }
