@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import MultiRedditViewHoc from './containers/MultiRedditViewHoc'
 import MultiRedditListHoc from './containers/MultiRedditListHoc'
 import AuthRedditConfirm from './containers/AuthRedditConfirm'
+import MultiForm from './components/MultiForm'
 import Navigation from './containers/Navigation'
 
 const AuthRedditLogin = () => (
@@ -16,6 +17,7 @@ const App = () => (
       <Route path="/auth/reddit/login" component={AuthRedditLogin} />
       <Route path="/auth/reddit/confirm" component={AuthRedditConfirm} />
       <Route path="/multi/:multi" component={MultiRedditViewHoc} />
+      <Route path="/add-multi" component={MultiForm} />
       <Route path="/" exact component={MultiRedditListHoc} />
     </div>
   </BrowserRouter>

@@ -2,12 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const MultiRedditView = (props) => {
-  const { multi, subs, handleChangeMembership } = props
+  const { multi, match, subs, changeMultiMembership } = props
   if (!multi) {
     return (
       <div>
         <Link to="/">Back</Link>
-        <h1>Invalid multi {props.match.params.multi}</h1>
+        <h1>Invalid multi {match.params.multi}</h1>
         <hr/>
       </div>
     )
@@ -15,7 +15,7 @@ const MultiRedditView = (props) => {
   return (
     <div>
       <Link to="/">Back</Link>
-      <h1>{multi.data.name}</h1>
+      <h1>{ multi.data.name }</h1>
       <hr/>
       <h3>Subs:</h3>
       <ul>
@@ -26,7 +26,7 @@ const MultiRedditView = (props) => {
               <input
                 type="checkbox"
                 checked={checked}
-                onChange={()=>handleChangeMembership(multi, sub, checked)} />
+                onChange={()=>changeMultiMembership(multi, sub, checked)} />
               {sub.data.display_name}
             </li>
           )

@@ -19,17 +19,16 @@ const renameMulti = (display_name, from, to) => ({
   }
 })
 
-// not implemented
 const deleteMulti = (multipath) => ({
   type: "DELETE_MULTI",
   payload: {
     request: {
+      method: "delete",
       url: `/api/multi/${multipath}`
     }
   }
 })
 
-// not implemented
 const createMulti = (model, multipath) => ({
   type: "CREATE_MULTI",
   payload: {
@@ -74,18 +73,34 @@ const addSubredditToMulti = (multipath, srname) => ({
   }
 })
 
+export const addMulti = (model) => {
+  return dispatch => {
+    dispatch(
+      createMulti(model, `user/vinogvla/m/${model.display_name}`)
+    )
+  }
+}
+
+export const removeMulti = (multi) => {
+  return dispatch => {
+    dispatch(deleteMulti(multi.data.path.slice(1,-1)))
+  }
+}
+
 export const changeMultiMembership = (multi, sub, selected) => {
   return dispatch => {
-    if (selected) {
-      dispatch(removeSubredditFromMulti(multi.data.path, sub.data.display_name))
-        .then(() => dispatch(refresh()))
-    }
-    else {
-      dispatch(addSubredditToMulti(multi.data.path, sub.data.display_name))
-        .then(() => dispatch(refresh()))
-    }
-    
-    dispatch({type: "WILL_CHANGE_MULTI_MEMBERSHIP"})    
+    selected ?
+      dispatch(removeSubredditFromMulti(
+          multi.data.path.slice(1,-1),
+          sub.data.display_name
+        )
+      )
+    :
+      dispatch(addSubredditToMulti(
+        multi.data.path.slice(1,-1),
+        sub.data.display_name
+      )
+    )       
   } 
 }
 

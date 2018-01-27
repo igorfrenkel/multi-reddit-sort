@@ -12,12 +12,61 @@ const reducer = (state = initialState, action) => {
         ...state,
         token: action.payload.data.access_token
       }
+
     case "GET_MULTIS_SUCCESS":
       return {
         ...state,
-        multis: action.payload.data
+        multis: action.payload.data.sort((a, b) => a.data.name < b.data.name ? -1 : 1)
       }
-    
+  
+    case "DELETE_MULTI_SUCCESS": { 
+      return {
+        ...state,
+        multis: state.multis.filter(multi => 
+          multi.data.name !== action.meta.previousAction.payload.request.url.split('/').pop()
+        )
+      }
+    } 
+
+    case "ADD_SUB_TO_MULTI_SUCCESS":
+      return {
+        ...state,
+        multis: state.multis.map(multi => {
+          if (action.meta.previousAction.payload.request.url.includes(multi.data.path)) {
+            return {
+              ...multi,
+              data: {
+                ...multi.data,
+                subreddits: multi.data.subreddits.concat(
+                  action.meta.previousAction.payload.request.params.model
+                )
+              }
+            }
+          }
+          return multi
+        })
+      }
+
+    case "REMOVE_SUB_FROM_MULTI_SUCCESS":
+      return {
+        ...state,
+        multis: state.multis.map(multi => {
+          if (action.meta.previousAction.payload.request.url.includes(multi.data.path)) {
+            return {
+              ...multi,
+              data: {
+                ...multi.data,
+                subreddits: multi.data.subreddits.filter(sub =>
+                  sub.name !== action.meta.previousAction.payload.request.url.split('/').pop()
+                )
+              }
+            }
+          }
+          return multi
+        })
+      }
+
+    // Note: this is hacky...
     case "GET_SUBS_SUCCESS":
       return {
         ...state,
