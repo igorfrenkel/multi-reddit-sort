@@ -86,7 +86,9 @@ const reducer = (state = initialState, action) => {
     case "GOT_ALL_SUBS":
       return {
         ...state,
-        subs: state.subs_temp,
+        subs: state.subs_temp.sort((a, b) =>
+          (a.data.display_name < b.data.display_name) ? -1 : 1
+        ),
         subs_temp: []
       }
 
