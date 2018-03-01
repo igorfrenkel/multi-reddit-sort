@@ -17,16 +17,16 @@ const getMyInfo = () => ({
 })
 
 // not implemented
-const renameMulti = (display_name, from, to) => ({
-  type: "RENAME_MULTI",
-  payload: {
-    request: {
-      method: "post",
-      url: "/api/multi/rename",
-      params: { display_name, from, to }
-    }
-  }
-})
+// const renameMulti = (display_name, from, to) => ({
+//   type: "RENAME_MULTI",
+//   payload: {
+//     request: {
+//       method: "post",
+//       url: "/api/multi/rename",
+//       params: { display_name, from, to }
+//     }
+//   }
+// })
 
 const deleteMulti = (multipath) => ({
   type: "DELETE_MULTI",
@@ -50,16 +50,16 @@ export const createMulti = (model, multipath) => ({
 })
 
 // not implemented
-const updateMulti = (model, multipath) => ({
-  type: "UPDATE_MULTI",
-  payload: {
-    request: {
-      method: 'put',
-      url: `/api/multi/${multipath}`,
-      params: { model }
-    }
-  }
-})
+// const updateMulti = (model, multipath) => ({
+//   type: "UPDATE_MULTI",
+//   payload: {
+//     request: {
+//       method: 'put',
+//       url: `/api/multi/${multipath}`,
+//       params: { model }
+//     }
+//   }
+// })
 
 const removeSubredditFromMulti = (multipath, srname) => ({
   type: "REMOVE_SUB_FROM_MULTI",

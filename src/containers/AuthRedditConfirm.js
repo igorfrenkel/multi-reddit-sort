@@ -23,7 +23,6 @@ const AuthRedditConfirm = (props) => {
     return (<div>Authenticating...</div>)
   }
 
-
 const mapStateToProps = (state) => (state)
 
 const mapDispatchToProps = dispatch => ({

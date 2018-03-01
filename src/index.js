@@ -6,6 +6,8 @@ import './index.css'
 import App from './App'
 import store from './store.js'
 import registerServiceWorker from './registerServiceWorker'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin()
 
 ReactDOM.render(
     <Provider store={store}>
